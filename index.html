@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Same-Ending num1 Pair — Master Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Spline+Sans+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ox:#5a1119; --ox2:#7d1d28; --gold:#b8893b; --gold2:#d8b15e;
+  --ink:#1a1413; --paper:#f4ece0; --paper2:#ece0cd; --line:#c9b79a;
+  --green:#2f5d3a; --dim:#6b5d4c;
+  --mono:'Spline Sans Mono',monospace; --serif:'Fraunces',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:11px}
+body{
+  font-family:var(--mono); background:var(--paper); color:var(--ink);
+  line-height:1.32; padding:14px;
+  background-image:radial-gradient(circle at 12% 8%, rgba(184,137,59,.05),transparent 55%),
+    radial-gradient(circle at 88% 92%, rgba(90,17,25,.05),transparent 55%);
+}
+.wrap{max-width:1640px;margin:0 auto}
+header{border:2px solid var(--ox);background:var(--ox);color:var(--paper);padding:10px 16px;
+  display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+header h1{font-family:var(--serif);font-weight:900;font-size:2.1rem;letter-spacing:-.5px;line-height:1}
+header h1 em{font-style:italic;color:var(--gold2)}
+header .meta{font-size:.82rem;color:var(--gold2);text-align:right}
+.tag{display:inline-block;background:var(--gold);color:var(--ink);padding:1px 7px;border-radius:2px;
+  font-weight:700;font-size:.78rem;margin-left:5px}
+.cols{column-count:3;column-gap:12px;margin-top:12px}
+@media(max-width:1200px){.cols{column-count:2}}
+@media(max-width:760px){.cols{column-count:1}html{font-size:10px}}
+section{break-inside:avoid;border:1px solid var(--line);background:var(--paper2);
+  margin:0 0 12px;padding:9px 11px;border-radius:3px}
+section.hot{border:1.5px solid var(--ox);background:linear-gradient(180deg,#f6ede0,#efe2cd)}
+section.proof{border:1.5px solid var(--green)}
+h2{font-family:var(--serif);font-weight:900;font-size:1.18rem;color:var(--ox);
+  border-bottom:1.5px solid var(--gold);padding-bottom:3px;margin-bottom:6px;letter-spacing:-.3px;
+  display:flex;align-items:center;gap:6px}
+h2 .n{font-family:var(--mono);font-size:.74rem;background:var(--ox);color:var(--paper);
+  border-radius:50%;width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+h3{font-size:.86rem;font-weight:700;color:var(--ox2);margin:7px 0 3px;text-transform:uppercase;letter-spacing:.4px}
+p{margin:3px 0;font-size:.9rem}
+code,.kbd{font-family:var(--mono);background:#e3d4bd;padding:0 3px;border-radius:2px;font-size:.86rem;font-weight:500}
+.eq{display:block;background:var(--ink);color:var(--paper);padding:5px 8px;border-radius:3px;
+  font-size:.86rem;margin:4px 0;overflow-x:auto;white-space:pre;border-left:3px solid var(--gold)}
+.eq.g{border-left-color:var(--green)}
+.eq b{color:var(--gold2)}
+ul{margin:3px 0 3px 2px;list-style:none}
+li{font-size:.88rem;margin:2.5px 0;padding-left:13px;position:relative}
+li::before{content:"▸";position:absolute;left:0;color:var(--gold);font-weight:700}
+li.ok::before{content:"✓";color:var(--green)}
+li.no::before{content:"✗";color:var(--ox2)}
+.k{color:var(--ox2);font-weight:700}
+.dim{color:var(--dim);font-size:.84rem}
+table{width:100%;border-collapse:collapse;margin:4px 0;font-size:.82rem}
+th,td{border:1px solid var(--line);padding:2px 4px;text-align:left}
+th{background:var(--ox);color:var(--paper);font-weight:600}
+td.c{text-align:center}
+.pill{display:inline-block;font-size:.74rem;font-weight:700;padding:0 5px;border-radius:8px;margin:1px 1px}
+.pill.af{background:#dbe7d8;color:var(--green);border:1px solid var(--green)}
+.pill.ab{background:#f0d9d3;color:var(--ox);border:1px solid var(--ox2)}
+.note{font-size:.82rem;color:var(--dim);font-style:italic;border-left:2px solid var(--gold);padding-left:6px;margin:4px 0}
+.win{background:#fbe8b0;padding:0 3px;border-radius:2px;font-weight:700}
+footer{margin-top:12px;border:2px solid var(--ox);background:var(--ink);color:var(--paper);
+  padding:10px 16px;font-size:.86rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer a{color:var(--gold2)}
+.big{font-family:var(--serif);font-weight:900;font-size:1rem;color:var(--gold2)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+hr{border:none;border-top:1px dashed var(--line);margin:6px 0}
+</style>
+
+<style id="protect">
+*{ -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none; }
+@media print{ html,body{display:none !important;} }
+img,section,header,footer{ -webkit-user-drag:none; user-drag:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>The <em>Same-Ending</em> num1 Pair <span class="tag">MASTER REFERENCE</span></h1>
+  <div class="meta">secp256k1 dataset puzzle · 800 folders · single-page synthesis<br>
+  every identity, structure &amp; barrier · author: MAINAKSH NP SINGH (mainaksh@u.nus.edu)</div>
+</header>
+
+<div class="cols">
+
+  <!-- 1 PROBLEM -->
+  <section class="hot">
+    <h2><span class="n">1</span>The Problem</h2>
+    <p>Find <code>s1n1</code> (the <code>num1</code> of some line in <code>set1.txt</code>) and <code>s2n1</code>
+    (the <code>num1</code> of some line in <code>set2.txt</code>) that share the <span class="k">same last digit</span>.</p>
+    <h3>Allowed</h3>
+    <ul>
+      <li class="ok">diff values (set1 &amp; set2) and any arithmetic on diffs</li>
+      <li class="ok">line numbers <code>i</code>; constants <code>M</code>, <code>N</code></li>
+      <li class="ok">full-value add / subtract / equality-compare on num1, num2</li>
+      <li class="ok">cross-folder patterns</li>
+    </ul>
+    <h3>Forbidden</h3>
+    <ul>
+      <li class="no">reading <span class="k">any digit</span> of num1 / num2 (not even one bit)</li>
+      <li class="no">modulo / arithmetic on num1, num2 yielding a residue</li>
+      <li class="no"><code>(start1 − start2) mod 10</code></li>
+      <li class="no">bitwise / string ops on num1, num2</li>
+      <li class="no">folder names as the anchor</li>
+    </ul>
+    <p class="note">The task reduces to recovering one bit: <span class="win">a mod 5</span> = <code>K = (9−2a) mod 10</code>.</p>
+  </section>
+
+  <!-- 2 DATASET -->
+  <section>
+    <h2><span class="n">2</span>Dataset</h2>
+    <ul>
+      <li>80 parents × subfolders 0–9 × {set1.txt, set2.txt} × 100,000 lines</li>
+      <li>line format: <code>num1 - num2 = diff</code>, <code>diff∈0..9</code>, num1/num2 ≈ 77 digits</li>
+      <li><code>num1 = num2 + diff</code> on every line</li>
+      <li><b>set1</b>: num2 increments <code>+1</code>/line; diff counts <span class="k">down</span> in blocks</li>
+      <li><b>set2</b>: num2 decrements <code>−1</code>/line; diff counts <span class="k">up</span> (mirror of set1)</li>
+      <li>num1 is <b>constant within a diff-block</b>; block length ≤ 10</li>
+      <li>folder NAME = anchor → folder <code>i</code> has start-num2 ending in <code>i</code></li>
+    </ul>
+  </section>
+
+  <!-- 3 CONSTANTS -->
+  <section>
+    <h2><span class="n">3</span>Constants &amp; Anchor</h2>
+    <div class="eq">M = secp256k1 order
+  = 1157920892373161954235709850086879
+    07852837564279074904382605163141
+    518161494337   (ends 7)
+N = 100000</div>
+    <ul>
+      <li><code>start1 = num2_s1[1]</code>, <code>start2 = num2_s2[1]</code></li>
+      <li class="ok"><code>num2_s1[x] + num2_s2[x] = M+N</code> — every line (full value)</li>
+      <li>anchor <code>a = start1 mod 10</code> — <span class="k">HIDDEN</span>; only <code>a mod 5</code> matters</li>
+      <li><code>K = (9 − 2a) mod 10</code> — always odd</li>
+      <li><code>s3 = start1 − start2</code>; <code>s3 mod 10 = 2a − 7</code> ⟵ the forbidden bit</li>
+      <li><code>a mod 5 = 3·((s3 mod10)+7) mod 5</code> (if it could be read; 3 = inv 2 mod 5)</li>
+    </ul>
+  </section>
+
+  <!-- 4 PER-LINE -->
+  <section>
+    <h2><span class="n">4</span>Per-Line mod 10</h2>
+    <div class="eq">num1_s1 = <b>a</b> + x − 1 + d_s1
+num2_s1 = <b>a</b> + x − 1
+num1_s2 = 8 − <b>a</b> − x + d_s2
+num2_s2 = 8 − <b>a</b> − x</div>
+    <p class="note">The anchor enters as <b>+a in set1</b> and <b>−a in set2</b> — opposite signs. This sign flip is the hinge of the whole puzzle.</p>
+  </section>
+
+  <!-- 5 ANCHOR-FREE SUMS -->
+  <section>
+    <h2><span class="n">5</span>Anchor-Free Sums &amp; Diffs</h2>
+    <ul>
+      <li class="ok"><code>num1_s1 + num1_s2 = (M+N) + D</code> &nbsp;<span class="dim">(mod10 = 7+D, D=d1+d2)</span></li>
+      <li class="ok"><code>num2_s1 + num2_s2 = M+N</code> &nbsp;<span class="dim">(mod10 = 7)</span></li>
+      <li class="ok"><code>num1_s1 − num2_s1 = d_s1</code></li>
+      <li class="ok"><code>num1_s2 − num2_s2 = d_s2</code></li>
+    </ul>
+    <p class="note">Every <b>sum</b> across set1+set2 lands on the fixed constant <code>M+N</code> → the anchor cancels. Sums are anchor-free; only <b>differences</b> retain <code>s3</code>.</p>
+  </section>
+
+  <!-- S/D  ENDING SUM & DIFFERENCE -->
+  <section class="hot">
+    <h2><span class="n">SD</span>★ Ending Sum &amp; Difference</h2>
+    <p>Cross-pair form of §5: set1 line <code>A</code>, set2 line <code>B</code>, last digits only. The <b>sum of endings</b> <span class="pill af">S anchor-free</span> drops the anchor; the <b>difference of endings</b> <span class="pill ab">D carries 2a</span> keeps it.</p>
+    <div class="eq">S(A,B) = (7 + (A − B) + d1A + d2B) mod 10      — the sum of endings
+D(A,B) = (<b>2a</b>−7 + (A + B) + d1A − d2B) mod 10  — the difference of endings</div>
+    <ul>
+      <li class="no">same-ending ⟺ <code>D ≡ 0</code></li>
+      <li class="ok"><code>S</code> is anchor-free / observable — lands on the fixed <code>7</code></li>
+      <li><code>D</code> carries <code>2a</code> — <span class="k">the protected residue</span></li>
+      <li><code>a = start1 mod 10</code></li>
+    </ul>
+    <p class="note">Straight from §4: the <b>+a / −a</b> sign flip cancels the anchor in <code>S</code> and doubles it to <code>2a</code> in <code>D</code>. Same object as §16 (<code>s1n1 − s2n1 = s3 + (A+B−2)</code>, <code>s3 = 2a−7</code>): pinning same-ending needs both <code>S</code> and <code>D</code>, and reading which <code>D</code> is zero is the one residue that isn't free.</p>
+  </section>
+
+  <!-- 6 LABEL -->
+  <section class="hot">
+    <h2><span class="n">6</span>★ LABEL Identity</h2>
+    <div class="eq g">LABEL(x) = (2x + d_s1 − d_s2) mod 10
+same-line same-ending ⟺ LABEL = K</div>
+    <p>Verified <span class="k">100%</span> inside the winning group and <span class="k">0%</span> elsewhere across all 800 folders. The cleanest same-line characterization — but recognizing <code>LABEL=K</code> needs <code>K</code> (the anchor).</p>
+  </section>
+
+  <!-- 7 SHARED DIGIT -->
+  <section>
+    <h2><span class="n">7</span>Shared Digit h</h2>
+    <p>At a same-ending pair the common digit <code>h</code> satisfies (3 = inv 2 mod 5):</p>
+    <div class="eq">same-line:  h mod5 = 3·(7 + D) mod 5
+cross:      h mod5 = 3·(7 + (x1−x2) + D) mod 5</div>
+    <p class="dim">Both verified 100%. D = d_s1 + d_s2.</p>
+  </section>
+
+  <!-- 8 CROSS / EQUAL-DIFF -->
+  <section>
+    <h2><span class="n">8</span>Cross-Pair &amp; Equal-Diff</h2>
+    <ul>
+      <li class="ok">cross-pair same-ending ⟺ <b>equal diffs</b> AND <code>x1 + x2 ≡ K</code></li>
+      <li>equal-diff witness: set1 <code>x1 = 1</code>, set2 <code>x2 = 8 − 2a</code></li>
+    </ul>
+  </section>
+
+  <!-- 9 NEGATIVE GAP -->
+  <section>
+    <h2><span class="n">9</span>Negative-Gap Mirror</h2>
+    <ul>
+      <li>set1: <code>num1[x] &lt; num1[x−1]</code> ⟺ <code>d[x] ≤ d[x−1] − 2</code> <span class="dim">(look back)</span></li>
+      <li>set2: same drop ⟺ <code>d[x] ≤ d[x+1] − 2</code> <span class="dim">(look next)</span></li>
+      <li>both cap at <code>diff ≤ 7</code>. Pure diff/line — anchor-free.</li>
+    </ul>
+  </section>
+
+  <!-- 10 CONSTANT-ENDING BLOCK -->
+  <section class="proof">
+    <h2><span class="n">10</span>✓ Constant-Ending Block</h2>
+    <p>set2 lines where <code>x mod 10 = d_s2[x]</code> all end in <code>(8 − a)</code>. Any two are same-ending <b>anchor-free</b>:</p>
+    <div class="eq g">num1_s2[x] − num1_s2[y]
+  = (y − x) + (x mod10 − y mod10)
+  ≡ 0 (mod 10)   — from line numbers alone</div>
+    <p class="note">Works because <b>start2 cancels</b> (both lines from set2) — the one genuinely read-free same-ending detector. Gives "same digit" but never <i>which</i> digit, nor <code>a</code>.</p>
+  </section>
+
+  <!-- 11 SUM-ZERO / DOUBLE-SUM -->
+  <section>
+    <h2><span class="n">11</span>Sum-Zero &amp; Double-Sum</h2>
+    <h3>Sum-ends-0</h3>
+    <ul>
+      <li><code>d1 + d2 ≡ 3</code> ⟺ <code>num1_s1 + num1_s2</code> ends 0</li>
+      <li>those same-ending share digit ∈ <code>{0, 5}</code></li>
+    </ul>
+    <h3>Double-Sum (cross)</h3>
+    <div class="eq">s1n1+s2n2 ends0 AND s1n2+s2n1 ends0
+ ⟺ d_s1[A]=d_s2[B] AND (A−B+d_s1[A])≡3</div>
+  </section>
+
+  <!-- 12 RECIPROCAL COUPLES -->
+  <section class="hot">
+    <h2><span class="n">12</span>★ Reciprocal Couples {A,B}</h2>
+    <p>Defined by <code>d_s1[A]=d_s2[B]</code>, <code>d_s1[B]=d_s2[A]</code>, <code>A+B ≡ K</code>.</p>
+    <h3>Anchor-free invariants (unconditional)</h3>
+    <ul>
+      <li class="ok"><code>d_s1[A] + d_s1[B] ≡ 6</code></li>
+      <li class="ok"><code>d_s2[A] + d_s2[B] ≡ 6</code></li>
+      <li class="ok"><code>d_s1[A] − d_s1[B] ≡ 2(B − A)</code></li>
+    </ul>
+    <h3>a-bearing (only on same-ending subset, circular)</h3>
+    <ul>
+      <li><code>A + B ≡ 9 − 2a</code> &nbsp;<span class="dim">(line #s only)</span></li>
+      <li><code>h_f + h_s ≡ 2a + 3</code> &nbsp;<span class="dim">(the digits)</span></li>
+    </ul>
+    <p class="note">Forward-pair &amp; swap-pair same-ending are the <b>same condition</b> <code>A+B=K</code> — both match or neither. Combining <code>A+B≡9−2a</code> with <code>d1A+d1B≡6</code> yields no new info (a-coeff stays −2).</p>
+  </section>
+
+  <!-- 13 BARRIER -->
+  <section class="proof">
+    <h2><span class="n">13</span>∎ The Barrier (Theorem)</h2>
+    <p>Every observable = a linear transform of 4 base values; the anchor enters with coefficient <code>(set1 wt) − (set2 wt)</code>.</p>
+    <table>
+      <tr><th>Enumeration</th><th>anchor-free</th><th>a-bearing</th><th>escape</th></tr>
+      <tr><td>2400 transforms [−3,3]⁴</td><td class="c">482</td><td class="c">1918</td><td class="c k">0</td></tr>
+      <tr><td>invariant catalog [−2,2]⁴</td><td class="c">124</td><td class="c">500</td><td class="c k">0</td></tr>
+    </table>
+    <ul>
+      <li><b>0</b> transforms both eliminate the anchor AND reveal it (same for <code>a mod 2</code>)</li>
+      <li>anchor-free invariants add <code>0</code> to the a-coefficient → can never unlock an a-bearing one</li>
+      <li>the single missing quantity is <code>s3 mod 10 = 2a − 7</code></li>
+    </ul>
+    <p class="note">Reading <code>a mod 5</code> from anchor-free observables is impossible. One residue read is mathematically required.</p>
+  </section>
+
+  <!-- 14 ROTATION Q -->
+  <section>
+    <h2><span class="n">14</span>Rotation Variable Q</h2>
+    <div class="eq">Q(line) = (start + line − 1) mod 10
+chain filter: (Q + diff) mod 10 odd</div>
+    <p>Substituting the line-derived <code>Q</code> for num2 makes the chain filter <b>anchor-free</b> (the original <code>(num2+diff)mod10 = num1 mod10</code> was a forbidden read). Survives on diffs + line numbers only.</p>
+  </section>
+
+  <!-- 15 {4,9} DISCOVERY -->
+  <section class="hot">
+    <h2><span class="n">15</span>★ The {4,9} Discovery</h2>
+    <p>Running intersection_Q (which emits only <b>class-1</b> couples) per folder: same-ending output appears <span class="win">only when anchor ∈ {4,9}</span>.</p>
+    <div class="eq">class-1 same-ending ⟺ K = 1
+K = 9 − 2a = 1 ⟺ 2a ≡ 8 ⟺ a ∈ {4,9}
+{4,9} = exactly the a mod 5 = 4 class</div>
+    <ul>
+      <li>a=4 → 36/36 same-ending; a=9 → 48/48; all others → 0</li>
+      <li class="no">detection reads <code>s1n1 mod10 / s2n1 mod10</code> → it is the forbidden read</li>
+    </ul>
+  </section>
+
+  <!-- 16 CROSS DIFF -->
+  <section>
+    <h2><span class="n">16</span>Cross Difference Carries s3</h2>
+    <div class="eq">s1n1[A] − s2n1[B] = s3 + (A+B−2)
+same-ending ⟺ s3 + (A+B−2) ≡ 0 (mod10)</div>
+    <p>For class-1 (<code>A+B≡1</code>) this is <code>s3 − 1 ≡ 0</code> ⟺ <code>a∈{4,9}</code>. The whole output's status is governed by one value <code>(s3−1) mod10 = 2a−8</code> — the anchor bit. Checking "ends in 0" of a 77-digit number <b>is</b> the read.</p>
+  </section>
+
+  <!-- 17 ADDITION -->
+  <section>
+    <h2><span class="n">17</span>Addition Cancels the Anchor</h2>
+    <div class="eq g">s1n1 + s2n1 = (M+N) + (A−B) + (d1+d2)</div>
+    <p>Because <code>start1+start2 = M+N</code> is fixed, the <b>sum</b> has no <code>a</code> at all. Addition is anchor-free → it can never isolate {4,9}. Only <b>subtraction</b> keeps <code>s3</code>.</p>
+    <p class="note">Rule of thumb: ops that cancel start1/start2 (all sums, all same-set differences, raw_i − raw_j) lose the anchor; only quantities that retain <code>s3</code> see it — and reading <code>s3</code> needs the residue.</p>
+  </section>
+
+  <!-- 18 INTER-FOLDER -->
+  <section class="proof">
+    <h2><span class="n">18</span>✓ Inter-Folder Subtraction</h2>
+    <div class="eq g">start1_i − start1_ref = k_i · (N+1)
+N+1 = 100001   (exact integer multiples)</div>
+    <ul>
+      <li class="ok">recovers <b>relative</b> anchors <code>a_i − a_j</code> read-free (differences are small integers)</li>
+      <li class="no">absolute <code>a</code> cancels in every difference; <code>{a_0+c_i} = {0..9}</code> for any <code>a_0</code></li>
+    </ul>
+    <p class="note">Relative ≠ absolute. Inter-folder subtraction gives the same signature <code>±1000010</code> for all five same-class pairs — it groups, it cannot single out {4,9}.</p>
+  </section>
+
+  <!-- 19 FAMILIES -->
+  <section class="proof">
+    <h2><span class="n">19</span>✓ The 5 Families (no mod 10)</h2>
+    <p>Group by step multiplier <code>k = (start1_i−start1_ref)//(N+1)</code>; same family iff <code>(k_i−k_j)</code> divisible by 5 — tested as <code>(k_i−k_j) − 5·((k_i−k_j)//5) == 0</code>. Pure integer arithmetic.</p>
+    <table>
+      <tr><th>family</th><th>folders</th><th>a mod 5</th></tr>
+      <tr><td class="c">0</td><td class="c">{0, 5}</td><td class="c">0</td></tr>
+      <tr><td class="c">1</td><td class="c">{1, 6}</td><td class="c">1</td></tr>
+      <tr><td class="c">2</td><td class="c">{2, 7}</td><td class="c">2</td></tr>
+      <tr><td class="c">3</td><td class="c">{3, 8}</td><td class="c">3</td></tr>
+      <tr><td class="c win">4</td><td class="c win">{4, 9}</td><td class="c win">4</td></tr>
+    </table>
+    <p class="dim">Read-free partition; {4,9} land together. Which family is the absolute "class 4" still needs one reference.</p>
+  </section>
+
+  <!-- 20 cross_9minus2a -->
+  <section>
+    <h2><span class="n">20</span>cross_9minus2a</h2>
+    <ul>
+      <li><b>B2</b>: set2 lines with <code>line mod10 = d_s2</code> → all num1 end in <code>(8−a)</code> (anchor-free same-ending block)</li>
+      <li><b>B1(T)</b>: set1 lines with <code>(line + d_s1) mod10 = T</code></li>
+      <li>B1(T) pairs same-ending with B2 ⟺ <code>T = 9 − 2a = K</code></li>
+      <li>winning <code>T</code> is <b>constant within each family</b> (f0,f5→9; f1,f6→7; f2,f7→5; f3,f8→3; <span class="win">f4,f9→1</span>)</li>
+    </ul>
+  </section>
+
+  <!-- 21 ROTATION SWEEP -->
+  <section class="hot">
+    <h2><span class="n">21</span>★ Rotation Sweep (q=0..9)</h2>
+    <p>Run intersection_Q at all 10 rotations; record same-ending signature:</p>
+    <div class="eq">a ∈ {4,9} → [S S S S S S S S S S]
+others    → [0 0 0 0 0 0 0 0 0 0]</div>
+    <p>Rotation changes only <b>how many</b> couples survive (counts alternate), never <b>whether</b> they're same-ending (fixed by K). 10 independent confirmations → robust {4,9} detector. Still rests on the one ending read.</p>
+  </section>
+
+  <!-- 22 abovesameld -->
+  <section>
+    <h2><span class="n">22</span>The (value − xxx) Trap</h2>
+    <p>Scripts subtract the start <code>xxx = start1</code> before <code>mod10</code>. But:</p>
+    <div class="eq g">num2[x] − xxx = (start1+x−1) − start1 = x − 1</div>
+    <p>The anchor <b>cancels</b> → every <code>(num2 − xxx) mod10</code> condition is line-based, not anchor-bearing (matrix ≈ 500 matches for every choice/anchor). The only a-bearing part is a raw <b>num1 last digit</b> ("10 above share same last digit", value <code>(a+x−1) mod10</code>) — i.e. a direct read.</p>
+  </section>
+
+  <!-- 23 CHAINED SUBTRACTION -->
+  <section>
+    <h2><span class="n">23</span>Chained Subtraction</h2>
+    <p>Per class-1 couple, <code>raw = s1n1−s2n1</code> ends in <code>(2a−8) mod10</code> (constant). Walk <code>v_k = v_{k−1} − raw_k</code> on the units digit:</p>
+    <div class="eq">a ∈ {4,9} → ending 0 → chain FLAT 0
+others    → ending ≠ 0 → chain CYCLES</div>
+    <p>Sharpest qualitative detector (flat vs cycling). But <code>raw mod10</code> is the read; <code>raw_i − raw_j = (A_i+B_i)−(A_j+B_j)</code> cancels <code>s3</code> (anchor-free), so no full-value-equality test of "multiple of 10" exists for a 77-digit number.</p>
+  </section>
+
+  <!-- 24 WHAT SET2 ADDS -->
+  <section class="hot">
+    <h2><span class="n">24</span>★ Why set2 Is Essential</h2>
+    <div class="eq">set1 ending carries  +a
+set2 ending carries  −a   (opposite!)</div>
+    <ul>
+      <li><b>set1 alone</b>: only <code>+a</code> everywhere → every anchor-free op cancels it → <code>a</code> is <b>absent</b> from all observables (unreachable at any number of reads)</li>
+      <li><b>+ set2</b>: supplies the <code>−a</code> term →
+        <code>start1−start2 = s3</code> carries <code>2a</code> (reachable with <b>one</b> read);
+        <code>start1+start2 = M+N</code> cancels it</li>
+    </ul>
+    <p class="note">set2 doesn't make it read-free — it makes it <b>extractable with a single read</b>, turning an impossible single-file problem into a one-read two-file problem.</p>
+  </section>
+
+  <!-- 25 READ-FREE vs READ -->
+  <section class="proof">
+    <h2><span class="n">25</span>✓ Read-Free vs ✗ Needs-Read</h2>
+    <h3>Achievable read-free</h3>
+    <ul>
+      <li class="ok">constant-ending block same-ending (within set2)</li>
+      <li class="ok">inter-folder relative anchors</li>
+      <li class="ok">grouping all folders into the 5 a-mod-5 families</li>
+      <li class="ok">couple-survival counts per rotation</li>
+      <li class="ok">all reciprocal anchor-free invariants (sum ≡ 6, etc.)</li>
+    </ul>
+    <h3>Provably needs ≥1 residue read</h3>
+    <ul>
+      <li class="no">isolating / labeling {4,9} (= a mod 5 = 4)</li>
+      <li class="no">any same-ending verdict on cross pairs</li>
+      <li class="no">recovering absolute <code>a mod 5</code> or <code>a mod 2</code></li>
+    </ul>
+  </section>
+
+  <!-- 26 DETECTOR EQUIVALENCE -->
+  <section>
+    <h2><span class="n">26</span>All Detectors Are One Read</h2>
+    <p>Every {4,9} detector found reduces to the same single residue <code>(2a−8) mod10</code>:</p>
+    <ul>
+      <li>same-ending count (rotation sweep) → reads <code>num1 mod10</code></li>
+      <li>"which offset r zeros the difference" → trial mod10</li>
+      <li>rotated pairing <code>B+r</code> 200-vs-0 → reads <code>num1 mod10</code></li>
+      <li>chained subtraction flat-vs-cycle → reads <code>raw mod10</code></li>
+      <li>abovesameld "same last digit" → raw <code>num1 mod10</code></li>
+    </ul>
+    <p class="note">A residue can only come from a residue op (<code>%10</code>, last-digit, <code>//10</code>, or trial-subtract-to-zero). Rotation/chaining make the signature <i>robust</i>, never <i>read-free</i>.</p>
+  </section>
+
+  <!-- 27 BOTTOM LINE -->
+  <section class="hot">
+    <h2><span class="n">27</span>Bottom Line</h2>
+    <p class="big">Every legal method narrows to exactly 5 candidate a-mod-5 classes — the theoretical floor.</p>
+    <p>Selecting the winner is the single bit <code>a mod 5 = s3 mod10 = 2a−7</code>, provably unreachable from anchor-free observables (theorem over all 2400 transforms + direct invariant enumeration). <code>a mod 2</code> is equally unreachable without a parity read.</p>
+    <p>Inter-folder subtraction recovers relative anchors and groups folders into 5 families read-free, but absolute <code>a</code> needs one tie — one num2 mod 10, or a folder name (both forbidden). The {4,9} pattern is a real detector of the <code>a mod 5 = 4</code> class, but works only via the ending read.</p>
+  </section>
+
+</div>
+
+<footer>
+  <div>
+    <span class="big">800 folders → 5 families → 1 protected bit.</span><br>
+    <span class="dim">Subtraction preserves the anchor (s3); addition cancels it (M+N). The anchor is reachable only through s3, and s3's units digit is the one read.</span>
+  </div>
+  <div style="text-align:right">
+    challenge dataset &amp; bounty<br>
+    <a href="https://securedatabit.com/2tao0sluhy6m/sset.7z.html">securedatabit.com/2tao0sluhy6m/sset.7z</a><br>
+    author: <span class="big">MAINAKSH NP SINGH</span> · contact: <a href="mailto:mainaksh@u.nus.edu">mainaksh@u.nus.edu</a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var block=function(e){e.preventDefault();e.stopPropagation();return false;};
+  ['contextmenu','copy','cut','dragstart','selectstart'].forEach(function(ev){document.addEventListener(ev,block);});
+  window.addEventListener('beforeprint',function(){document.body.style.display='none';});
+  window.addEventListener('afterprint',function(){document.body.style.display='';});
+  document.addEventListener('keydown',function(e){
+    var k=(e.key||'').toLowerCase(), ctrl=e.ctrlKey||e.metaKey;
+    if(ctrl && ['c','x','s','p','u'].indexOf(k)>-1)return block(e);
+    if(k==='f12')return block(e);
+    if(ctrl && e.shiftKey && ['i','j','c'].indexOf(k)>-1)return block(e);
+  },true);
+})();
+</script>
+</body>
+</html>
